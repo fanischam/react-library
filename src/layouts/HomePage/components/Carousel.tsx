@@ -1,6 +1,7 @@
 import { ReturnBook } from './ReturnBooks';
 import { useEffect, useState } from 'react';
 import BookModel from '../../../models/BookModel';
+import { SpinnerLoading } from '../../Utils/SpinnerLoading';
 
 export const Carousel = () => {
   const [books, setBooks] = useState<BookModel[]>([]);
@@ -40,11 +41,7 @@ export const Carousel = () => {
   }, []);
 
   if (isLoading) {
-    return (
-      <div className='container m-5'>
-        <p>Loading..</p>
-      </div>
-    );
+    return <SpinnerLoading />;
   }
 
   if (httpError) {
@@ -116,7 +113,9 @@ export const Carousel = () => {
       </div>
       {/* Mobile */}
       <div className='d-lg-none mt-3'>
-        <ReturnBook book={books[7]} key={books[7].id} />
+        <div className='row d-flex justify-content-center align-items-center'>
+          <ReturnBook book={books[7]} key={books[7].id} />
+        </div>
       </div>
       <div className='homepage-carousel-title mt-4'>
         <a href='#' className='btn btn-outline-secondary btn-lg'>
